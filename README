@@ -1,0 +1,56 @@
+REQUIREMENTS
+
+1. Software
+CMake 2.6
+
+1.1 Software if building outside of OE
+PCRE (eventually - not at the moment)
+Qt 4.5 (only if you wish to run tests)
+Yajl (if using helper scripts, then don't worry about this - otherwise, it becomes more complicated).
+Git (if using helper scripts)
+
+2. Set up
+If building through OE, use the bitbake target.
+
+If you want to build outside of OE, there are convenience function in the scripts directory:
+
+setup_<builder>_<debug|release>.sh
+
+This sets up the project to be useable with whatever tool you want (e.g. makefiles, KDevelop, Eclipse, XCode, etc).
+The project targets the native platform (not cross compiling to the device) and is built in debug/release mode as
+the script name suggests.
+
+If you wish to target the device, use setup_cross_<debug|release>.  This is similar as above, except it creates a
+Makefile project targetting the device requested.  The usage would be (on castle for instance)
+  scripts/setup_cross_release.sh castle $HOME/projects/main/nova/oe/BUILD-castle
+
+2.1 Configuring the build variables
+If you have Qt 4.5 or later installed, but you don't want to build the unit tests, set the CMake variable NO_TESTS to TRUE.
+Similarly, if you have doxygen installed, set the CMake variable DONT_PREPARE_DOCS to TRUE. You can also set these variables
+to skip the checks altogether (if you are trying to make the build as fast as possible).
+
+To pass in additional variables to cmake, export the CMAKE_ADDITIONAL_FLAGS environment variable before calling the script:
+
+e.g.
+
+CMAKE_ADDITIONAL_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/pbnjson_test" scripts/setup_make_release.sh
+
+Will configure the makefile-based build targetting the machine it is built on in release mode
+using an install prefix of $HOME/pbnjson_test.
+
+2.2 Building without tests & documentation
+Likely, for development, you want to build pbnjson without any unit tests, nor any documentation to speed up the build.
+
+Using the CMAKE_ADDITIONAL_FLAGS environment variable, call the scripts with the appropriate variables.
+
+CMAKE_ADDITIONAL_FLAGS="-DWITH_TESTS=False -DWITH_DOCS=0"
+
+(NOTE: CMake boolean values are interpretted flexibly: http://kernigh.pbworks.com/CMake#CMakesupportsbooleanvariables)
+
+2.3  Help - my build fails to compile
+Make sure that you are not building tests, or that if you are, you have Qt 4.5 on the system.
+Also, if you plan on re-running CMake, it is probably best to remove the build directory before-hand.
+
+3. Testing
+To run the unit tests, simply run 'make test' in the build directory that was created for the target
+you selected.

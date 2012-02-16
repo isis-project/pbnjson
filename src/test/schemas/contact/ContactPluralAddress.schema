@@ -1,0 +1,8 @@
+{
+   "id"   : "ContactPluralAddress",
+   "type" : "object",
+   "extends" : [
+                { "$ref" : "ContactAddress" },
+                { "$ref" : "ContactPluralField" }
+               ]
+}

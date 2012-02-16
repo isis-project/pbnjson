@@ -1,0 +1,26 @@
+{
+   "id"   : "ContactAddress",
+   "type" : "object",
+   "properties" : {
+      "streetAddress" : {"type"        : "string",
+                         "optional"    : true,
+                         "format"      : "street-address",
+                         "description" : "The full street address component, which may include house number, street name, PO BOX, and multi-line extended street address information."},
+      "locality"      : {"type"        : "string",
+                         "optional"    : true,
+                         "format"      : "locality",
+                         "description" : "The city or locality component."},
+      "region"        : {"type"        : "string",
+                         "optional"    : true,
+                         "format"      : "region",
+                         "description" : "The state or region component."},
+      "postalCode"    : {"type"        : "string",
+                         "optional"    : true,
+                         "format"      : "postal-code",
+                         "description" : "The zipcode or postal code component."},
+      "country"       : {"type"        : "string",
+                         "optional"    : true,
+                         "format"      : "country",
+                         "description" : "The country name component."}
+   }
+}

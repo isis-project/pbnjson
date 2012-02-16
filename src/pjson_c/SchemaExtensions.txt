@@ -1,0 +1,104 @@
+1. Type extension
+
+simple-type-definition = "string" | "number" | "integer" | "boolean" | "object" | "array" | "null" | "any" | inline-schema | reference-schema
+reference-schema : "{" "$ref" ":" string "}"
+inline-schema : schema but $ref is not allowed as a key
+
+Initialize a stack of schemas for all possible types
+as schemas are popped off, they are more generic
+any conflicts between schema definitions in the union and
+and any specifications in any top-level schema are not allowed unless
+all the schemas are inlined.  However,
+the validator only has to guarantee that any schemas within a union
+will simply override any settings specified outside.
+
+For example:
+
+{ type : [{ type : "object",
+            properties : {
+                a : { type : "string" }
+                b : { type : "boolean" }
+           }
+          }, { type : "object",
+            properties : {
+                b : { type : "string" }
+            }
+          }]
+  properties : { b : "integer" }
+}
+
+This would count as an invalid schema, but if a validator didn't want to (couldn't) check the validity of the schema
+it must have the behaviour of either matching an object that has a key 'b' that is a string or a key 'b' that is a boolean
+along with a key 'a' that is a string.
+
+To get an object where 'b' matches an integer, you could specify an object that doesn't have a key 'b' defined.
+
+The best way to think about it is that any schema defined within a union type extends from the schema that surrounds it
+(this is recursive all the way to the top-level schema).  Think of it as applying an implicit inheritance tree (for instance,
+it lets you define an inheritance tree for a schema you do not own).
+
+NOTE: In this current extension, arrays are not defined.  Although they could mean tuples, you have to explicitely make that clear.
+
+1.1  Collolaries
+The null type can be equivalently expressed as { enum : [null] } in the type field.
+
+1.1 External references
+Schemas that are external references can never have any fields other than $ref.  Combined w/ 1., this lets you do something like:
+
+{
+   type : [{$ref : "person"}, 
+           {
+              type : "object",
+              properties : {
+                  familyID : { type : ["integer","string"], optional : false }
+                  members : { 
+                      type : "array",
+                      items : {
+	                      type : {$ref : "person"},
+	                      hasFamily : { type : "boolean" }
+	                  }
+	             }
+	             hasFamily : { disallow : "any" }
+	             // example below of disallowing false for hasFamily
+	             // hasFamily : { type : "boolean", enum : [true], optional : true }
+              }
+           }]
+           
+  properties : {
+     familyID : { type : "integer,string", optional : true }
+     hasFamily : { type : "boolean", optional : true }
+  }
+  items : {
+     $ref : "marriedperson",
+     properties {
+        spouse : { type : "string,{ $ref : "marriedperson" }" }
+        optional : false
+     }
+}
+
+What this means is that you can pass a person with a pointer to a family, or an object representing the complete family.
+
+If you pass the complete family, then it has a mandatory familyID field, a members field, and cannot have the hasFamily field.  If optional
+were to be set to false, then the parser should always fail in this case because there would be a contradiction it could catch.  
+
+If the second form of the hasFamily where to be specified as well, then this would be a contradiction in the schema that a 
+validator might not be able to catch (the child hasFamily would then be optional while the schema it extends from would have hasFamily as non-optional).
+However, in this case, a compliant implementation need only check that the child's hasFamily matches.
+
+In the general case, it should apply the schemas going outwards from the type.
+
+3.  Default clarification
+A compliant validating parser shall, if a key is missing and the default is defined, simulate behaviour such that any libraries sitting atop this parser
+will think like the key came in with the value.
+
+Similarly, a compliant validating generator (or standalone validation of a DOM) will inject the key with the default value if it didn't exist.
+
+4.  Enum clarification
+Only literals are allowed as elements in the array (e.g. null, true, false, a string literal, or a number).  Objects & arrays are not.
+
+5.  Item/additionalProperties clarification
+Using a schema definition as the value to the key 'items' is deprecated, since this overlaps with the usage of additionalProperties.
+
+If an array is matched, then additionalProperties specifies the schema that must be matched in abscence of any restrictions in items. 
+
+An array need not match all schemas in items.  Similarly, it may provide more than necessary.  If you want to match only a specific set, then use maxItems & minItems to control this.

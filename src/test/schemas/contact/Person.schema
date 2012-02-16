@@ -1,0 +1,14 @@
+{
+   "id"   : "Person",
+   "type" : "object",
+   "properties" : {
+      "contactIds"   : {"type"     : "array",
+                     "description" : ""
+                     "items"       : {
+                             "type"        : "string",
+                             "description" : "DB ID of a Contact"
+                     }},
+      "displayIndex" : {"type"     : "string",
+                     "description" : "A sort key: UI displays records sorted by this field"},
+   }
+}

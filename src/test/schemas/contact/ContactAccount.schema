@@ -1,0 +1,13 @@
+{
+   "id"   : "ContactAccount",
+   "type" : "object",
+   "properties" : {
+      "domain"    : {"type"        : "string",
+                     "description" : "The top-most authoritative domain for this account."},
+      "userName"  : {"type"        : "string",
+                     "description" : "An alphanumeric user name, usually chosen by the user"},
+      "userid"    : {"type"        : "string",
+                     "optional"    : true,
+                     "description" : "A user ID number, usually chosen automatically, and usually numeric but sometimes alphanumeric."},
+   }
+}

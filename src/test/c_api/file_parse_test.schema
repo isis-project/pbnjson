@@ -1,0 +1,47 @@
+{
+	"type" : "object",
+	"properties" : {
+		"foo" : {
+			"type" : "array",
+			"items" : [
+				{ "type" : "string", "enum" : [ "1bc" ] },
+				{ "type" : "string", "enum" : [ "def" ] },
+				{
+					"type" : "object",
+					"properties" : {
+						"uio" : { "type" : "string", "enum" : ["xyz"] },
+						"asdf" : { "type" : "number", "minValue" : 43523.23, "maxValue" : 43524.24 }
+					},
+					"additionalProperties" : false
+				}
+			],
+			"additionalProperties" : false
+		},
+		"bar" : { "type" : "object", "additionalProperties" : false },
+		"asdf" : { "type" : "object", "additionalProperties" : false },
+		"asdkflja" : { "type" : "object", "additionalProperties" : false },
+		"asdfoiwuer" : { "type" : "boolean", "enum" : [ false ] },
+		"woierulksjadflkj" : { "type" : "boolean", "enum" : [ true ] },
+		"23904ukjasdhfka890u23,masdgl;ji" : { "type" : "null" }
+	},
+	"additionalProperties" : false
+}
+
+
+/*
+{
+	"foo" : [ "1bc", "def", { "uio" : "xyz", "asdf" : 43523.2305423 } ],
+	"bar" : { },
+	"asdf" : {},
+	"asdkflja" : {},
+	"asdfoiwuer" : false,
+	"woierulksjadflkj" : true,
+	"23904ukjasdhfka890u23,masdgl;ji" : null
+
+}
+*/
+
+
+
+
+

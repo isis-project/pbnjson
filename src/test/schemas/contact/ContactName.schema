@@ -1,0 +1,21 @@
+{
+   "id"   : "ContactName",
+   "type" : "object",
+   "properties" : {
+      "familyName"      : {"type"        : "string",
+                           "optional"    : true,
+                           "description" : "The family name of this Contact, or 'Last Name' in most Western languages."},
+      "givenName"       : {"type"        : "string",
+                           "optional"    : true,
+                           "description" : "The given name of this Contact, or 'First Name' in most Western languages."},
+      "middleName"      : {"type"        : "string",
+                           "optional"    : true,
+                           "description" : "The middle name(s) of this Contact."},
+      "honorificPrefix" : {"type"        : "string",
+                           "optional"    : true,
+                           "description" : "The honorific prefix(es) of this Contact, or 'Title' in most Western languages."},
+      "honorificSuffix" : {"type"        : "string",
+                           "optional"    : true,
+                           "description" : "The honorifix suffix(es) of this Contact, or 'Suffix' in most Western languages."}
+   }
+}

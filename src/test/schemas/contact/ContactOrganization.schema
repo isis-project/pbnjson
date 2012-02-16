@@ -1,0 +1,32 @@
+{
+   "id"   : "ContactOrganization",
+   "type" : "object",
+   "extends" : "ContactPluralField"
+   "properties" : {
+      "name"        : {"type"        : "string",
+                       "description" : "The name of the organization."},
+      "department"  : {"type"        : "string",
+                       "optional"    : true,
+                       "description" : "The department within this organization."},
+      "title"       : {"type"        : "string",
+                        "optional"    : true,
+                        "description" : "The job title or role within this organization."},
+      "type"        : {"type"        : "string",
+                       "optional"    : true,
+                       "description" : "The type of organization, with Canonical Values job and school."},
+      "startDate"   : {"type"        : "string",
+                       "optional"    : true,
+                       "format"      : "date",
+                       "description" : "The date this Contact joined this organization."},
+      "endDate"     : {"type"        : "string",
+                       "optional"    : true,
+                       "format"      : "date",
+                       "description" : "The date this Contact left this organization."},
+      "location"    : {"extends"     : { "$ref" : "ContactAddress" },
+                       "optional"    : true,
+                       "description" : "The physical location of this organization."},
+      "description" : {"type"        : "string",
+                       "optional"    : true,
+                       "description" : "A textual description of the role this Contact played in this organization."}
+   }
+}

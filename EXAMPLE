@@ -1,0 +1,81 @@
+For JSON schemas, refer to http://www.json-schema.org for more detailed documentation.
+
+To create a JSON object, you probably want something like:
+
+-- response.schema
+{
+	"type" : "object", /* the top-level response is a JSON object
+	"properties" : { /* the keys allowed by 
+		"errorCode" : { "type" : "integer" }, /* errorCode is a non-floating point number */
+		"errorText" : { "type" : "string" } /* errorText is a string value */
+	}
+	"additionalProperties" : false /* don't allow any other properties to appear in this object */
+}
+
+-- example.cpp
+#include <pbnjson.hpp>
+#include <string>
+#include <iostream>
+
+....
+
+namespace pj = pbnjson;
+
+....
+{
+	pj::JValue myresponse = pj::Object();
+	myresponse.put("errorCode", 5);	// {"errorCode":5}
+	myresponse.put("errorText", "This is an example of a pbnjson object");	// {"errorCode":5,"errorText":"This is an example of a pbnjson object"}
+
+	pj::JSchemaFile responseSchema("response.schema");
+
+	pj::JGenerator serializer(NULL);	// our schema that we will be using does not have any external references
+	std::string serialized;
+
+	if (!serializer.toString(myresponse, responseSchema, serialized)) {
+		// handle error (e.g. generated json would fail to validate & or some other error occured)
+		return;
+	}
+
+	std::cout << serialized << std::endl;	// write out {"errorCode":5,"errorText"...} to stdout
+}
+
+To parse a JSON object, you probably want something like:
+
+-- input.schema
+{
+	"type" : "object",
+	"properties" : {
+		"guess" : {
+			"type" : "number",
+			"minimum" : 1,
+			"maximum" : 10
+		}
+	}
+}
+
+-- example.cpp
+#include <pbnjson.hpp>
+
+...
+
+namespace pj = pbnjson;
+
+...
+
+{
+	std::string input;
+	...	// input is initialized
+
+	pj::JSchemaFile inputSchema("input.schema");
+
+	JDomParser parser(NULL);	// our schema that we will be using does not have any external references
+	if (!parser.parse(input, inputSchema, NULL)) {	// in this example, I don't care about the actual errors that cause parsing to fail.
+		// handle error
+		return;
+	}
+
+	pj::JValue parsed = parser.getDom();	// parsed is a validly formed JSON object or array and validated against the schema.
+	std::cout << parsed["guess"] << std::endl; // this is always guaranteed to print a number between 1 & 10.  no additional validation necessary within the code.
+}
+

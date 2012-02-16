@@ -1,0 +1,15 @@
+{
+   "id"   : "ContactPluralField",
+   "type" : "object",
+   "properties" : {
+      "value"   : {"type"        : "string",
+                   "description" : "The primary value of this field."},
+      "type"    : {"type"        : "string",
+                   "optional"    : true,
+                   "options"    : [{"label":"work"},{"label":"home"},{"label":"other"}],
+                   "description" : "The type of field for this instance, usually used to label the preferred function of the given contact information."},
+      "primary" : {"type"        : "boolean",
+                   "optional"    : true,
+                   "description" : "A Boolean value indicating whether this instance of the Plural Field is the primary or preferred value of for this field."}
+   }
+}
