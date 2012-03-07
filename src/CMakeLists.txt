@@ -158,7 +158,7 @@ endif()
 
 # Variable compatibility with existing build scripts
 # Deprecated in favour of WITH_TESTS
-set(WITH_TESTS TRUE CACHE BOOL "Control building of unit tests")
+set(WITH_TESTS FALSE CACHE BOOL "Control building of unit tests")
 if (DEFINED NO_TESTS)
     set(WITH_TESTS NOT ${NO_TESTS} CACHE BOOL "Control building of unit tests" FORCE)
 endif()

@@ -5,6 +5,9 @@
 # YAJL_LIBRARIES - libraries necessary to link to to get yajl
 include (LibFindMacros)
 
+set(YAJL_INCLUDE_DIR /home/anupam/Isis/isis_pbnjson/src/deps/yajl/yajl-1.0.7/include)
+set(YAJL_LIBRARY /home/anupam/Isis/isis_pbnjson/src/deps/yajl/yajl-1.0.7/lib)
+
 # Include directories
 find_path(YAJL_INCLUDE_DIR NAMES yajl/yajl_parse.h yajl/yajl_gen.h yajl/yajl_common.h)
 
