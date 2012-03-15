@@ -5,17 +5,17 @@
 # YAJL_LIBRARIES - libraries necessary to link to to get yajl
 include (LibFindMacros)
 
-set(YAJL_INCLUDE_DIR $ENV{MY_YAJL_INCLUDE_PATH})
-set(YAJL_LIBRARY $ENV{MY_YAJL_LIB_PATH})
+#set(YAJL_INCLUDE_DIR $ENV{MY_YAJL_INCLUDE_PATH})
+#set(YAJL_LIBRARY $ENV{MY_YAJL_LIB_PATH})
 
 # Include directories
-find_path(YAJL_INCLUDE_DIR NAMES yajl/yajl_parse.h yajl/yajl_gen.h yajl/yajl_common.h)
+find_path(YAJL_INCLUDE_DIR NAMES yajl/yajl_parse.h yajl/yajl_gen.h yajl/yajl_common.h PATHS $ENV{MY_YAJL_INCLUDE_PATH})
 
 # Find the library
 if (YAJL_STATIC)
-	find_library(YAJL_LIBRARY NAMES yajl_s)
+	find_library(YAJL_LIBRARY NAMES yajl_s PATHS $ENV{MY_YAJL_LIB_PATH})
 else ()
-	find_library(YAJL_LIBRARY NAMES yajl)
+	find_library(YAJL_LIBRARY NAMES yajl PATHS $ENV{MY_YAJL_LIB_PATH})
 endif ()
 
 # let LibFindMacros take care of the rest
