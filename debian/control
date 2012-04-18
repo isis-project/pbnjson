@@ -1,0 +1,15 @@
+Source: pbnjson
+Section: webOS
+Priority: extra
+Maintainer: Anupam <anupam.kaul@palm.com>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+Homepage: https://github.com/isis-project/pbnjson
+#Vcs-Git: git://git.debian.org/collab-maint/pbnjson.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/pbnjson.git;a=summary
+
+Package: pbnjson
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Pbnjson is Palm's Better Native JSON library. Supports schemas and has C and C++ APIs.
+ <insert long description, indented with spaces>

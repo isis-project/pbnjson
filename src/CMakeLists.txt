@@ -196,3 +196,8 @@ if (WITH_BENCHMARKS)
 else()
 	message(STATUS "Skipping benchmarks")
 endif()
+
+add_custom_target (deb 
+	dpkg-buildpackage "-rfakeroot")
+
+
