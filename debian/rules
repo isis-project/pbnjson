@@ -8,6 +8,31 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
+export DEB_STAGING_LIBDIR=debian/pbnjson/usr/lib
 
 %:
 	dh $@ 
+
+.PHONY: override_dh_auto_build override_dh_auto_test override_dh_install
+
+override_dh_auto_build:
+
+override_dh_auto_test:
+
+override_dh_auto_clean:
+
+override_dh_install:
+
+override_dh_auto_install:
+
+override_dh_installdirs:
+	install -d debian/pbnjson
+	mkdir -p $(DEB_STAGING_LIBDIR)
+	install -m 444 ./src/pjson_c/*.a    $(DEB_STAGING_LIBDIR)
+	install -m 444 ./src/pjson_c/*.so   $(DEB_STAGING_LIBDIR)
+	install -m 444 ./src/pjson_cxx/*.so $(DEB_STAGING_LIBDIR)
+	install -m 444 ./src/deps/yajl/yajl-1.0.7/lib/lib* $(DEB_STAGING_LIBDIR)
+
+
+#override_dh_clean:
+

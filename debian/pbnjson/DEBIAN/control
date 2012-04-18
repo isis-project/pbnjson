@@ -2,7 +2,8 @@ Package: pbnjson
 Version: 1.0.0-1
 Architecture: amd64
 Maintainer: Anupam <anupam.kaul@palm.com>
-Installed-Size: 44
+Installed-Size: 516
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:4.1.1), libstdc++6 (>= 4.4.0)
 Section: webOS
 Priority: extra
 Homepage: https://github.com/isis-project/pbnjson
