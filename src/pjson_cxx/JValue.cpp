@@ -36,7 +36,7 @@ JValue JValue::JNULL(jnull());
 
 static inline raw_buffer strToRawBuffer(const std::string& str)
 {
-	return (raw_buffer){str.c_str(), str.length()};
+    return (raw_buffer){str.c_str(), (long int) str.length()};
 }
 
 JValue::JValue()
