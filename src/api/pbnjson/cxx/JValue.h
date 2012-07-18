@@ -32,6 +32,7 @@ LICENSE@@@ */
 #include <utility>
 
 #include <stdint.h>
+#include <stdlib.h>
 
 #define PBNJSON_ZERO_COPY_STL_STR 0
 
