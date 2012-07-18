@@ -44,7 +44,6 @@ namespace pbnjson {
 			m_context->Enter();
 #endif
 
-			Handle<String> strToParse = args[0]->ToString();
 			Handle<Function> keyValueConverter = Local<Function>::Cast(args[1]);
 
 			{

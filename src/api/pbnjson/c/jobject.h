@@ -1049,7 +1049,7 @@ static inline jobject_key_value jkeyval(jvalue_ref key, jvalue_ref value)
  */
 static inline raw_buffer j_cstr_to_buffer(const char *cstring)
 {
-	return ((raw_buffer) { cstring, strlen(cstring) } );
+    return ((raw_buffer) { cstring, (long int) strlen(cstring) } );
 }
 
 /**
@@ -1074,7 +1074,7 @@ static inline jvalue_ref j_cstr_to_jval(const char *cstring)
  */
 static inline raw_buffer j_str_to_buffer(const char *string, size_t length)
 {
-	return ((raw_buffer){ (string), (length) });
+    return ((raw_buffer){ (string), (long int) (length) });
 }
 
 /**
