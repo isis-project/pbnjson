@@ -96,7 +96,7 @@ endif ()
 if(CMAKE_COMPILER_IS_GNUCC)
 	# std=c99: The C library will be C99 compliant (necessary for some stuff).
 	# fmessage-length=0: Make sure that errors & messages are printed on 1 line
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -fmessage-length=0 -Wall -Werror -pipe")
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -fmessage-length=0 -Wall -pipe")
 	set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -O0 -DDEBUG -D_DEBUG -DPJSON_LOG_INFO -DPJSON_LOG_STDOUT")
 	set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -DNDEBUG -g")
 else(CMAKE_COMPILER_IS_GNUCC)
@@ -108,7 +108,7 @@ endif(CMAKE_COMPILER_IS_GNUCC)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
 	# fmessage-length=0: Make sure that errors & messages are printed on 1 line
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmessage-length=0 -Wall -Werror -pipe")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmessage-length=0 -Wall -pipe")
 	set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -DDEBUG -D_DEBUG -DPJSON_LOG_INFO -DPJSON_LOG_STDOUT")
 	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG -g")
 else(CMAKE_COMPILER_IS_GNUCXX)
