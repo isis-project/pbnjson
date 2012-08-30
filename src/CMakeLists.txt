@@ -200,4 +200,4 @@ endif()
 add_custom_target (deb 
 	dpkg-buildpackage "-rfakeroot")
 
-
+install(FILES pbnjson.pc DESTINATION /usr/local/webos/usr/share/pkgconfig/)

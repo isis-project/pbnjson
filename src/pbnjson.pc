@@ -1,0 +1,13 @@
+# Use of this file is subject to license terms as set forth in the file COPYING found at https://github.com/openwebos/pbnjson/blob/master/COPYING
+
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: pbnjson
+Description: JSON implementation in C
+Version: 1.8.0
+Requires: 
+Libs:  -L${libdir} -lpbnjson
+Cflags: -I${includedir}
