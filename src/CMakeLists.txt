@@ -200,6 +200,6 @@ endif()
 add_custom_target (deb 
 	dpkg-buildpackage "-rfakeroot")
 
-if (-z $LUNA_STAGING)
+if (NOT IS_DIRECTORY "${LUNA_STAGING}/")
 	install(FILES pbnjson.pc DESTINATION /usr/local/webos/usr/share/pkgconfig/)
 endif()
